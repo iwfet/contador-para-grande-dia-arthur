@@ -11,6 +11,8 @@ const CountdownTimer = () => {
     seconds: 0,
   });
 
+  const [animationTriggered, setAnimationTriggered] = useState(false);
+
   const [celebrationProps, setCelebrationProps] = useSpring(() => ({
     opacity: 0,
     scale: 1,
@@ -45,12 +47,13 @@ const CountdownTimer = () => {
       timeRemaining.hours <= 0 &&
       timeRemaining.minutes <= 0 &&
       timeRemaining.seconds <= 0 &&
-      celebrationProps.opacity !== 1
+      !animationTriggered
     ) {
       // Se já passou das 19 horas e a animação de celebração não foi ativada, ativa-a
       setCelebrationProps({ opacity: 1, scale: 1.2 });
+      setAnimationTriggered(true);
     }
-  }, [timeRemaining, celebrationProps, setCelebrationProps]);
+  }, [timeRemaining, animationTriggered, setCelebrationProps]);
 
   return (
     <div className="countdown-container">
@@ -73,7 +76,7 @@ const CountdownTimer = () => {
               ),
             }}
           >
-            🎉 Parabéns!
+            🎉 Parabéns! 🎉
           </animated.div>
         </>
       ) : (
