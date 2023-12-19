@@ -11,6 +11,11 @@ const CountdownTimer = () => {
     seconds: 0,
   });
 
+  const [celebrationProps, setCelebrationProps] = useSpring(() => ({
+    opacity: 0,
+    scale: 1,
+  }));
+
   useEffect(() => {
     const targetTime = DateTime.local()
       .setZone("America/Sao_Paulo")
@@ -35,21 +40,17 @@ const CountdownTimer = () => {
     return () => clearInterval(timerInterval);
   }, []); // O segundo parâmetro vazio assegura que o useEffect só seja executado uma vez no montar do componente
 
-  const [celebrationProps, setCelebrationProps] = useSpring(() => ({
-    opacity: 0,
-    scale: 1,
-  }));
-
   useEffect(() => {
     if (
       timeRemaining.hours <= 0 &&
       timeRemaining.minutes <= 0 &&
-      timeRemaining.seconds <= 0
+      timeRemaining.seconds <= 0 &&
+      celebrationProps.opacity !== 1
     ) {
-      // Se já passou das 15 horas, ativa a animação de celebração
+      // Se já passou das 19 horas e a animação de celebração não foi ativada, ativa-a
       setCelebrationProps({ opacity: 1, scale: 1.2 });
     }
-  }, [timeRemaining, setCelebrationProps]);
+  }, [timeRemaining, celebrationProps, setCelebrationProps]);
 
   return (
     <div className="countdown-container">
