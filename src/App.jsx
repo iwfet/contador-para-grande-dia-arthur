@@ -73,7 +73,7 @@ const CountdownTimer = () => {
               ),
             }}
           >
-            🎉 Parabéns! 🎉
+            🎉 Parabéns!
           </animated.div>
         </>
       ) : (
