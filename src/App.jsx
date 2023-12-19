@@ -59,13 +59,14 @@ const CountdownTimer = () => {
     <div className="countdown-container">
       {timeRemaining.hours <= 0 &&
       timeRemaining.minutes <= 0 &&
-      timeRemaining.seconds <= 0 ? (
+      timeRemaining.seconds <= 0  && 
+      animationTriggered ? (
         <>
           <Confetti
             width={window.innerWidth}
             height={window.innerHeight}
             numberOfPieces={2000}
-            recycle={false}
+            recycle={true}
           />
           <animated.div
             className="celebration"
@@ -76,7 +77,7 @@ const CountdownTimer = () => {
               ),
             }}
           >
-            🎉 Parabéns! 🎉
+            🎉 Parabéns!
           </animated.div>
         </>
       ) : (
